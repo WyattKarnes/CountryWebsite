@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How This Site Was Built - Egypt</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        header {
+            height: 30vh;
+        }
+
+        .explainer-section {
+            background-color: rgba(0, 0, 0, 0.6);
+            margin: 40px auto;
+            max-width: 820px;
+            padding: 35px 40px;
+            border-radius: 15px;
+        }
+
+        .explainer-section h2 {
+            color: rgb(251, 168, 66);
+            font-size: 24pt;
+            margin-bottom: 15px;
+        }
+
+        .explainer-section p {
+            color: white;
+            font-size: 13pt;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .explainer-section code {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12pt;
+        }
+
+        pre {
+            background-color: #1a1a1a;
+            color: #d4d4d4;
+            padding: 18px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 11pt;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        .demo-box {
+            border: 2px solid rgb(251, 168, 66);
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 5px;
+        }
+
+        .demo-label {
+            color: rgb(251, 168, 66);
+            font-size: 10pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .demo-nav {
+            display: flex;
+            background-color: rgb(251, 168, 66);
+            padding: 10px 14px;
+            border-radius: 8px;
+            gap: 8px;
+        }
+
+        .demo-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 13pt;
+            padding: 6px 12px;
+            border: 1px groove white;
+            border-radius: 8px;
+            text-shadow: 0px 0px 2px black;
+        }
+
+        .demo-nav a.demo-active {
+            color: black;
+            text-shadow: none;
+        }
+
+        .demo-pill {
+            background-color: rgb(251, 168, 66);
+            color: black;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 12pt;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>How This Site Was Built</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="page1.html">The Pyramids</a></li>
+            <li><a href="page2.html">The Nile River</a></li>
+            <li><a href="page3.html">Mummies</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <!-- 1. Page Structure -->
+        <div class="explainer-section">
+            <h2>1. Page Structure</h2>
+            <p>Every page on this site uses the same basic HTML skeleton. Semantic elements like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, and <code>&lt;main&gt;</code> divide the page into meaningful sections that are easy to read and style.</p>
+            <pre>
+&lt;body&gt;
+
+    &lt;header&gt;
+        &lt;h1&gt;Welcome to Egypt&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;nav&gt;
+        ... navigation links ...
+    &lt;/nav&gt;
+
+    &lt;main&gt;
+        ... page content ...
+    &lt;/main&gt;
+
+&lt;/body&gt;</pre>
+        </div>
+
+        <!-- 2. Linking a Stylesheet -->
+        <div class="explainer-section">
+            <h2>2. Linking a Stylesheet</h2>
+            <p>All five pages on this site share a single CSS file called <code>styles.css</code>. The <code>&lt;link&gt;</code> tag inside <code>&lt;head&gt;</code> tells the browser where to find it. This means any change to <code>styles.css</code> instantly applies to every page.</p>
+            <pre>
+&lt;head&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;</pre>
+        </div>
+
+        <!-- 3. Background Images -->
+        <div class="explainer-section">
+            <h2>3. Background Images</h2>
+            <p>The site has two background images: one on the <code>&lt;body&gt;</code> that fills the entire page, and one on the <code>&lt;header&gt;</code> that acts as the hero image. Both use <code>background-size: cover</code> to make the image fill the space without leaving any gaps, no matter the screen size.</p>
+            <pre>
+body {
+    background-image: url(Images/backgnd1.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+header {
+    background-image: url(Images/hero.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+}</pre>
+            <div class="demo-box">
+                <p class="demo-label">Live Example — background-size: cover fills the container:</p>
+                <div style="height: 110px; background-image: url(Images/hero.webp); background-size: cover; background-position: center; border-radius: 8px;"></div>
+            </div>
+        </div>
+
+        <!-- 4. The Dark Overlay Trick -->
+        <div class="explainer-section">
+            <h2>4. The Dark Overlay Trick</h2>
+            <p>White text on a light photo is impossible to read. To fix this, a semi-transparent black layer is placed over the background image using <code>linear-gradient</code> with <code>rgba</code> color. The fourth number in <code>rgba</code> controls transparency — 0 is invisible, 1 is fully opaque.</p>
+            <pre>
+header {
+    background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),
+                      url(Images/hero.webp);
+}</pre>
+            <div class="demo-box">
+                <p class="demo-label">Live Example — without overlay vs. with overlay:</p>
+                <div style="display: flex; gap: 12px; height: 100px;">
+                    <div style="flex: 1; background-image: url(Images/hero.webp); background-size: cover; background-position: center; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-size: 15pt; font-weight: bold;">No overlay</span>
+                    </div>
+                    <div style="flex: 1; background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(Images/hero.webp); background-size: cover; background-position: center; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-size: 15pt; font-weight: bold;">With overlay</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Flexbox -->
+        <div class="explainer-section">
+            <h2>5. Flexbox</h2>
+            <p>Flexbox is used in two places: the navigation bar and the image gallery. By default, HTML elements stack vertically. Adding <code>display: flex</code> to a container arranges its children side by side in a row. <code>justify-content: center</code> then centers them horizontally.</p>
+            <pre>
+nav > ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}</pre>
+            <div class="demo-box">
+                <p class="demo-label">Live Example — default stacking vs. display: flex:</p>
+                <div style="display: flex; gap: 30px; align-items: flex-start;">
+                    <div style="flex: 1;">
+                        <p style="color: white; font-size: 10pt; margin-bottom: 8px;">Default (stacked):</p>
+                        <div>
+                            <div class="demo-pill" style="margin-bottom: 6px;">Link 1</div>
+                            <div class="demo-pill" style="margin-bottom: 6px;">Link 2</div>
+                            <div class="demo-pill">Link 3</div>
+                        </div>
+                    </div>
+                    <div style="flex: 1;">
+                        <p style="color: white; font-size: 10pt; margin-bottom: 8px;">display: flex:</p>
+                        <div style="display: flex; gap: 8px;">
+                            <div class="demo-pill">Link 1</div>
+                            <div class="demo-pill">Link 2</div>
+                            <div class="demo-pill">Link 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. The Image Gallery: Divs as Boxes -->
+        <div class="explainer-section">
+            <h2>6. The Image Gallery: Divs as Boxes</h2>
+            <p>A <code>&lt;div&gt;</code> is a generic container — an invisible box you can put anything inside. The image gallery on the homepage uses two layers of divs nested inside each other. The outer div (<code>.pics</code>) holds all three images in a row using flexbox. Inside it are three inner divs (<code>.container</code>), and each one holds a single <code>&lt;img&gt;</code>.</p>
+            <pre>
+&lt;div class="pics"&gt;
+
+    &lt;div class="container"&gt;
+        &lt;img src="Images/cairo.webp"&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+        &lt;img src="Images/sphinx.webp"&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+        &lt;img src="Images/statues.webp"&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;</pre>
+            <p>The reason for the inner <code>.container</code> div is to control the size. We give the container a fixed width and height, and then tell the image to fill it completely. This way CSS is sizing the box, and the image just fills whatever space the box takes up.</p>
+            <pre>
+.pics {
+    display: flex;        /* lines the containers up side by side */
+    height: 40vh;
+}
+
+.container {
+    width: 25%;           /* the box takes up 25% of the row */
+    height: 75%;
+}
+
+.container > img {
+    width: 100%;          /* image fills the box */
+    height: 100%;
+    object-fit: cover;
+}</pre>
+            <div class="demo-box">
+                <p class="demo-label">Live Example — the box structure made visible:</p>
+                <div style="display: flex; gap: 10px; height: 130px; border: 2px dashed rgba(251,168,66,0.5); border-radius: 8px; padding: 8px; position: relative;">
+                    <span style="position: absolute; top: -11px; left: 10px; background: rgba(0,0,0,0.8); color: rgb(251,168,66); font-size: 9pt; padding: 0 6px;">.pics (outer div)</span>
+                    <div style="flex: 1; border: 2px dashed white; border-radius: 8px; position: relative; overflow: hidden;">
+                        <span style="position: absolute; top: 2px; left: 6px; color: white; font-size: 8pt; z-index: 1; background: rgba(0,0,0,0.5); padding: 1px 4px; border-radius: 3px;">.container</span>
+                        <img src="Images/cairo.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Aerial view of Cairo, Egypt's capital city">
+                    </div>
+                    <div style="flex: 1; border: 2px dashed white; border-radius: 8px; position: relative; overflow: hidden;">
+                        <span style="position: absolute; top: 2px; left: 6px; color: white; font-size: 8pt; z-index: 1; background: rgba(0,0,0,0.5); padding: 1px 4px; border-radius: 3px;">.container</span>
+                        <img src="Images/sphinx.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="The Great Sphinx of Giza">
+                    </div>
+                    <div style="flex: 1; border: 2px dashed white; border-radius: 8px; position: relative; overflow: hidden;">
+                        <span style="position: absolute; top: 2px; left: 6px; color: white; font-size: 8pt; z-index: 1; background: rgba(0,0,0,0.5); padding: 1px 4px; border-radius: 3px;">.container</span>
+                        <img src="Images/statues.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Ancient Egyptian statues">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. object-fit: cover -->
+        <div class="explainer-section">
+            <h2>7. object-fit: cover</h2>
+            <p>The three photos on the homepage all have different original dimensions, but they need to fill their containers perfectly. <code>object-fit: cover</code> tells the browser to crop the image to fit the space while keeping its original proportions — no stretching.</p>
+            <pre>
+.container > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}</pre>
+            <div class="demo-box">
+                <p class="demo-label">Live Example — without vs. with object-fit: cover:</p>
+                <div style="display: flex; gap: 12px;">
+                    <div style="flex: 1;">
+                        <p style="color: white; font-size: 10pt; margin-bottom: 6px;">Without (stretched):</p>
+                        <img src="Images/sphinx.webp" style="width: 100%; height: 110px;" alt="The Great Sphinx of Giza">
+                    </div>
+                    <div style="flex: 1;">
+                        <p style="color: white; font-size: 10pt; margin-bottom: 6px;">With object-fit: cover:</p>
+                        <img src="Images/sphinx.webp" style="width: 100%; height: 110px; object-fit: cover; border-radius: 8px;" alt="The Great Sphinx of Giza">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. The Active Page Trick -->
+        <div class="explainer-section">
+            <h2>8. The Active Page Trick</h2>
+            <p>Each page highlights its own link in the navigation bar, so visitors always know where they are. This is done by adding <code>id="active"</code> to the correct <code>&lt;a&gt;</code> tag on each page, then styling that id differently in CSS.</p>
+            <pre>
+&lt;!-- On the Pyramids page, only that link gets the id: --&gt;
+&lt;li&gt;&lt;a href="index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a id="active" href="page1.html"&gt;The Pyramids&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="page2.html"&gt;The Nile River&lt;/a&gt;&lt;/li&gt;
+
+/* In styles.css: */
+#active {
+    color: black;
+    text-shadow: none;
+}</pre>
+            <div class="demo-box">
+                <p class="demo-label">Live Example — "The Pyramids" is marked as the active page:</p>
+                <div class="demo-nav">
+                    <a href="#">Home</a>
+                    <a href="#" class="demo-active">The Pyramids</a>
+                    <a href="#">The Nile River</a>
+                    <a href="#">Mummies</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
